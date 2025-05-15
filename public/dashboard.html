@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - وكيل واتساب</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <div class="dashboard-container">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fab fa-whatsapp"></i>
+                    <h1>وكيل واتساب</h1>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#overview" data-section="overview">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>نظرة عامة</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#sessions" data-section="sessions">
+                            <i class="fas fa-qrcode"></i>
+                            <span>جلسات واتساب</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#messages" data-section="messages">
+                            <i class="fas fa-comments"></i>
+                            <span>الرسائل</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacts" data-section="contacts">
+                            <i class="fas fa-address-book"></i>
+                            <span>جهات الاتصال</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#api" data-section="api">
+                            <i class="fas fa-code"></i>
+                            <span>واجهة API</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>الإعدادات</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3 id="userDisplayName">المستخدم</h3>
+                        <p id="userEmail">user@example.com</p>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="btn btn-outline btn-sm">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="sectionTitle">نظرة عامة</h1>
+                <div class="header-actions">
+                    <button id="refreshBtn" class="btn btn-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- قسم النظرة العامة -->
+            <section id="overview" class="content-section active">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>مرحبًا بك في لوحة تحكم وكيل واتساب. ابدأ بإنشاء جلسة واتساب جديدة لبدء استخدام الخدمة.</span>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>الجلسات النشطة</h3>
+                            <p class="stat-value" id="activeSessionsCount">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>الرسائل اليوم</h3>
+                            <p class="stat-value" id="todayMessagesCount">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-address-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>جهات الاتصال</h3>
+                            <p class="stat-value" id="contactsCount">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>وقت التشغيل</h3>
+                            <p class="stat-value" id="uptime">0 ساعة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <h2>إجراءات سريعة</h2>
+                    <div class="action-buttons">
+                        <button id="newSessionBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span>جلسة واتساب جديدة</span>
+                        </button>
+                        <button id="sendMessageBtn" class="btn btn-outline">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>إرسال رسالة</span>
+                        </button>
+                        <button id="viewContactsBtn" class="btn btn-outline">
+                            <i class="fas fa-address-book"></i>
+                            <span>جهات الاتصال</span>
+                        </button>
+                        <button id="apiDocsBtn" class="btn btn-outline">
+                            <i class="fas fa-code"></i>
+                            <span>توثيق API</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h2>النشاط الأخير</h2>
+                    <div class="activity-list" id="recentActivity">
+                        <div class="no-data">
+                            <i class="fas fa-inbox"></i>
+                            <p>لا يوجد نشاط حديث</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- قسم جلسات واتساب -->
+            <section id="sessions" class="content-section">
+                <div class="section-header-actions">
+                    <h2>جلسات واتساب</h2>
+                    <button id="createSessionBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        <span>جلسة جديدة</span>
+                    </button>
+                </div>
+                
+                <div class="sessions-list" id="sessionsList">
+                    <div class="no-data">
+                        <i class="fas fa-qrcode"></i>
+                        <p>لا توجد جلسات واتساب حالياً</p>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span>إنشاء جلسة جديدة</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- قالب لبطاقة جلسة -->
+                <template id="sessionCardTemplate">
+                    <div class="session-card" data-id="">
+                        <div class="session-header">
+                            <h3 class="session-name"></h3>
+                            <div class="session-status"></div>
+                        </div>
+                        <div class="session-body">
+                            <div class="session-qr" style="display: none;">
+                                <img src="" alt="رمز QR">
+                                <p>امسح رمز QR باستخدام واتساب على هاتفك</p>
+                            </div>
+                            <div class="session-info">
+                                <div class="info-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="session-created"></span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="session-last-activity"></span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-comments"></i>
+                                    <span class="session-messages-count"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="session-actions">
+                            <button class="btn btn-sm btn-outline session-view-btn">
+                                <i class="fas fa-eye"></i>
+                                <span>عرض</span>
+                            </button>
+                            <button class="btn btn-sm btn-outline session-refresh-btn">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>تحديث</span>
+                            </button>
+                            <button class="btn btn-sm btn-danger session-close-btn">
+                                <i class="fas fa-times"></i>
+                                <span>إغلاق</span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </section>
+            
+            <!-- قسم الرسائل -->
+            <section id="messages" class="content-section">
+                <div class="section-header-actions">
+                    <h2>الرسائل</h2>
+                    <div class="session-selector">
+                        <label for="messageSessionSelect">الجلسة:</label>
+                        <select id="messageSessionSelect">
+                            <option value="">اختر جلسة</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="messages-container">
+                    <div class="message-compose">
+                        <h3>رسالة جديدة</h3>
+                        <form id="sendMessageForm">
+                            <div class="form-group">
+                                <label for="messagePhone">رقم الهاتف</label>
+                                <input type="text" id="messagePhone" name="phone" placeholder="مثال: 966512345678" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="messageText">نص الرسالة</label>
+                                <textarea id="messageText" name="message" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>إرسال</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="messages-history">
+                        <h3>سجل الرسائل</h3>
+                        <div class="messages-list" id="messagesList">
+                            <div class="no-data">
+                                <i class="fas fa-inbox"></i>
+                                <p>لا توجد رسائل</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- قالب لعنصر رسالة -->
+                <template id="messageItemTemplate">
+                    <div class="message-item">
+                        <div class="message-info">
+                            <div class="message-phone"></div>
+                            <div class="message-time"></div>
+                        </div>
+                        <div class="message-content"></div>
+                        <div class="message-status"></div>
+                    </div>
+                </template>
+            </section>
+            
+            <!-- قسم جهات الاتصال -->
+            <section id="contacts" class="content-section">
+                <div class="section-header-actions">
+                    <h2>جهات الاتصال</h2>
+                    <div class="session-selector">
+                        <label for="contactSessionSelect">الجلسة:</label>
+                        <select id="contactSessionSelect">
+                            <option value="">اختر جلسة</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="contacts-container">
+                    <div class="contacts-controls">
+                        <div class="search-box">
+                            <input type="text" id="contactSearch" placeholder="بحث في جهات الاتصال...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="contacts-actions">
+                            <button id="importContactsBtn" class="btn btn-outline">
+                                <i class="fas fa-file-import"></i>
+                                <span>استيراد</span>
+                            </button>
+                            <button id="exportContactsBtn" class="btn btn-outline">
+                                <i class="fas fa-file-export"></i>
+                                <span>تصدير</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="contacts-list" id="contactsList">
+                        <div class="no-data">
+                            <i class="fas fa-address-book"></i>
+                            <p>لا توجد جهات اتصال</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- قالب لعنصر جهة اتصال -->
+                <template id="contactItemTemplate">
+                    <div class="contact-item">
+                        <div class="contact-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-name"></div>
+                            <div class="contact-phone"></div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn btn-icon contact-message-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                            <button class="btn btn-icon contact-info-btn">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </section>
+            
+            <!-- قسم واجهة API -->
+            <section id="api" class="content-section">
+                <h2>واجهة برمجة التطبيقات API</h2>
+                
+                <div class="api-container">
+                    <div class="api-key-section">
+                        <h3>مفتاح API الخاص بك</h3>
+                        <div class="api-key-display">
+                            <input type="text" id="apiKeyInput" readonly>
+                            <button id="copyApiKey" class="btn btn-icon">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button id="regenerateApiKey" class="btn btn-sm btn-outline">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>إعادة إنشاء</span>
+                            </button>
+                        </div>
+                        <p class="api-key-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            لا تشارك مفتاح API الخاص بك مع أي شخص، فهو يمنح وصولاً كاملاً إلى حساب واتساب الخاص بك.
+                        </p>
+                    </div>
+                    
+                    <div class="api-docs">
+                        <h3>توثيق واجهة برمجة التطبيقات</h3>
+                        
+                        <div class="api-endpoint">
+                            <h4>إرسال رسالة</h4>
+                            <div class="endpoint-info">
+                                <div class="endpoint-path">
+                                    <span class="method">POST</span>
+                                    <code>/api/send</code>
+                                </div>
+                                <div class="endpoint-description">
+                                    إرسال رسالة واتساب إلى رقم هاتف محدد.
+                                </div>
+                            </div>
+                            <div class="endpoint-details">
+                                <h5>المعلمات</h5>
+                                <table class="params-table">
+                                    <thead>
+                                        <tr>
+                                            <th>المعلمة</th>
+                                            <th>النوع</th>
+                                            <th>الوصف</th>
+                                            <th>إلزامي</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>phone</td>
+                                            <td>string</td>
+                                            <td>رقم الهاتف المستهدف (مع رمز البلد)</td>
+                                            <td>نعم</td>
+                                        </tr>
+                                        <tr>
+                                            <td>message</td>
+                                            <td>string</td>
+                                            <td>نص الرسالة المراد إرسالها</td>
+                                            <td>نعم</td>
+                                        </tr>
+                                        <tr>
+                                            <td>sessionId</td>
+                                            <td>string</td>
+                                            <td>معرف جلسة واتساب (اختياري، سيتم استخدام الجلسة الافتراضية)</td>
+                                            <td>لا</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <h5>ترويسات الطلب</h5>
+                                <table class="params-table">
+                                    <thead>
+                                        <tr>
+                                            <th>الترويسة</th>
+                                            <th>الوصف</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>x-api-token</td>
+                                            <td>مفتاح API الخاص بك</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <h5>مثال على طلب cURL</h5>
+                                <pre><code>curl -X POST "https://your-domain.com/api/send" \
+     -H "x-api-token: YOUR_API_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{"phone": "966512345678", "message": "مرحبا بك!"}'</code></pre>
+                                
+                                <h5>استجابة ناجحة</h5>
+                                <pre><code>{
+    "success": true,
+    "message": "تم إرسال الرسالة بنجاح"
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <!-- يمكن إضافة المزيد من نقاط النهاية API هنا -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- قسم الإعدادات -->
+            <section id="settings" class="content-section">
+                <h2>الإعدادات</h2>
+                
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h3>إعدادات الحساب</h3>
+                        <form id="accountSettingsForm">
+                            <div class="form-group">
+                                <label for="settingsUsername">اسم المستخدم</label>
+                                <input type="text" id="settingsUsername" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="settingsEmail">البريد الإلكتروني</label>
+                                <input type="email" id="settingsEmail" name="email" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span>حفظ التغييرات</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>تغيير كلمة المرور</h3>
+                        <form id="changePasswordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">كلمة المرور الحالية</label>
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">كلمة المرور الجديدة</label>
+                                <input type="password" id="newPassword" name="newPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmNewPassword">تأكيد كلمة المرور الجديدة</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key"></i>
+                                <span>تغيير كلمة المرور</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>إعدادات الإشعارات</h3>
+                        <div class="settings-options">
+                            <div class="settings-option">
+                                <label for="notifyNewMessages">إشعارات الرسائل الجديدة</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="notifyNewMessages" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-option">
+                                <label for="notifySessionStatus">إشعارات حالة الجلسة</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="notifySessionStatus" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-option">
+                                <label for="emailNotifications">إشعارات البريد الإلكتروني

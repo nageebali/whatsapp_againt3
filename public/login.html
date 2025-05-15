@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - وكيل واتساب</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <a href="/" class="logo">
+                    <i class="fab fa-whatsapp"></i>
+                    <h1>وكيل واتساب</h1>
+                </a>
+                <h2>تسجيل الدخول</h2>
+                <p>أدخل بياناتك للوصول إلى لوحة التحكم</p>
+            </div>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="alert" id="alertMessage" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email"  value="nageebali0@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">phone</label>
+                    <input type="phone" id="phone" name="phone" value="967777268083">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" value="967777268083">
+                        <button type="button" class="password-toggle" tabindex="-1">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group form-check">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">تذكرني</label>
+                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="btn-text">تسجيل الدخول</span>
+                    <span class="btn-loader" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>ليس لديك حساب؟ <a href="/register">إنشاء حساب جديد</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>
